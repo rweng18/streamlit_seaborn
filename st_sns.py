@@ -37,9 +37,13 @@ if fig_type == 'Histogram':
 
     sns.set_theme(style="darkgrid")
 
+    # Slider to determine the number of bins
+    bin_num = st.slider("Number of Bins #1", min_value = 5, max_value = 100,
+                                             value = 30, step = 5)
+
     plt = sns.histplot(diamonds[diamonds['cut'] == 'Ideal'], x="price",
                        edgecolor="0.3", linewidth=.5,
-                       log_scale=True) # AxesSubplot Object
+                       log_scale=True, bins = bin_num) # AxesSubplot Object
     plt.set_title("Histogram of Price of Ideal Cut Diamonds")
 
     # Necessary line of code to get underlying plot's object
@@ -50,9 +54,14 @@ if fig_type == 'Histogram':
     # Clears figure so you can plot the next without retaining first plot
     fig.clf()
 
+
+    # Slider to determine the number of bins
+    bin_num2 = st.slider("Number of Bins #2", min_value = 5, max_value = 100,
+                                              value = 30, step = 5)
+
     plt2 = sns.histplot(diamonds, x="price", hue="cut", multiple="stack",
                        palette="light:m_r", edgecolor=".3", linewidth=.5,
-                       log_scale=True) # AxesSubplot Object
+                       log_scale=True, bins = bin_num2) # AxesSubplot Object
 
     plt2.set_title("Stacked Histogram of Diamond Price by Cut")
 
@@ -72,7 +81,8 @@ elif fig_type == 'Lineplot':
 
     # Plot the responses for different events and regions
     plt3 = sns.lineplot(x="timepoint", y="signal",
-                        hue="region", style="event", data=fmri)
+                        hue="region", style="event",
+                        data=fmri)
 
     fig3 = plt3.get_figure()
 
